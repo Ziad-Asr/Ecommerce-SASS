@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import MainLayout from "./layouts/MainLayout/MainLayout";
+import { MainLayout } from "@layouts/index";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
