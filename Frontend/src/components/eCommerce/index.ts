@@ -1,3 +1,5 @@
 import HeaderBaskect from "./HeaderBaskect/HeaderBaskect";
+import Product from "./Product/Product";
+import Category from "./Category/Category";
 
-export { HeaderBaskect };
+export { HeaderBaskect, Product, Category };

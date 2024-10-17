@@ -30,6 +30,22 @@ const AppRouter = () => {
         {
           path: "products/:prefix",
           element: <Products />,
+          loader: ({ params }) => {
+            // loader => A route guard
+            if (
+              typeof params.prefix !== "string" ||
+              !/^[a-z]+$/i.test(params.prefix)
+            ) {
+              throw new Response("Bad Request", {
+                statusText: "Category not found",
+                status: 400,
+              });
+            }
+            return true;
+          },
+          // Condition to confirm that the category prefix is a pure string, because there is not category with name of any other characters
+          // So here we reduce backend calls to make the app more efficient
+          // throw new Response() => This is how we return errors in react-router-dom (to navigate to dynamic error page)
         },
         {
           path: "about-us",
