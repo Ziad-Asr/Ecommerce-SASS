@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import actGetCategories from "./act/actGetCategories";
+import actGetProductsByCatPrefix from "./act/actGetProductsByCatPrefix";
+
 import { TLoading } from "@customTypes/shared";
-import { TCategory } from "@customTypes/category";
+import { TProduct } from "@customTypes/products";
 
 interface ICategoriesState {
-  records: TCategory[];
+  records: TProduct[];
   loading: TLoading;
   error: string | null;
 }
@@ -15,20 +16,25 @@ const initialState: ICategoriesState = {
   error: null,
 };
 
-const categoriesSlice = createSlice({
-  name: "categories",
+const ProductsSlice = createSlice({
+  name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    // A fuction to clear data on leaving products page
+    productsCleanUp: (state) => {
+      state.records = [];
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(actGetCategories.pending, (state) => {
+    builder.addCase(actGetProductsByCatPrefix.pending, (state) => {
       state.loading = "pending";
       state.error = null;
     });
-    builder.addCase(actGetCategories.fulfilled, (state, action) => {
+    builder.addCase(actGetProductsByCatPrefix.fulfilled, (state, action) => {
       state.loading = "succeeded";
       state.records = action.payload;
     });
-    builder.addCase(actGetCategories.rejected, (state, action) => {
+    builder.addCase(actGetProductsByCatPrefix.rejected, (state, action) => {
       state.loading = "failed";
       if (action.payload && typeof action.payload === "string") {
         state.error = action.payload;
@@ -39,5 +45,6 @@ const categoriesSlice = createSlice({
   },
 });
 
-export { actGetCategories }; // I exported it from here, To import the slice and extract all data from it one time
-export default categoriesSlice.reducer;
+export const { productsCleanUp } = ProductsSlice.actions;
+export { actGetProductsByCatPrefix }; // I exported it from here, To import the slice and extract all data from it one time
+export default ProductsSlice.reducer;

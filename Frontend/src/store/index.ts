@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import categories from "./Categories/CategoriesSlice";
+import products from "./Products/ProductsSlice";
 
 export const store = configureStore({
-  reducer: { categories },
+  reducer: { categories, products },
 });
 
 export type RootState = ReturnType<typeof store.getState>; // In components, when I type (state.) it gives me a list of available reducers
