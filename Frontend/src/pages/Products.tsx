@@ -1,17 +1,19 @@
-import { Container, Row, Col } from "react-bootstrap";
-import { Product } from "@components/eCommerce";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { GridList } from "@components/common";
+import { Loading } from "@components/feedback";
 import {
   actGetProductsByCatPrefix,
   productsCleanUp,
 } from "@store/Products/ProductsSlice";
-import { useParams } from "react-router-dom";
+import { TProduct } from "@customTypes/products";
+import { Product } from "@components/eCommerce";
 
 const Products = () => {
-  const { records, loading, error } = useAppSelector((state) => state.products);
   const params = useParams();
   const dispatch = useAppDispatch();
+  const { loading, error, records } = useAppSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(actGetProductsByCatPrefix(params.prefix as string));
@@ -22,23 +24,13 @@ const Products = () => {
     }; // remove products from global state on leaving products page
   }, [dispatch, params]);
 
-  const ProductsList = records
-    ? records.map((record) => (
-        <Col
-          key={record.id}
-          xs={6}
-          md={3}
-          className="d-flex justify-content-center mb-5 mt-2"
-        >
-          <Product {...record} />
-        </Col>
-      ))
-    : "There are no records";
-
   return (
-    <Container>
-      <Row>{ProductsList}</Row>
-    </Container>
+    <Loading loading={loading} error={error}>
+      <GridList<TProduct>
+        records={records}
+        renderItem={(record) => <Product {...record} />}
+      />
+    </Loading>
   );
 };
 
