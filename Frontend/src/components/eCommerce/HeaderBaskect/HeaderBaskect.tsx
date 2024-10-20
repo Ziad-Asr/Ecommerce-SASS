@@ -1,22 +1,41 @@
-import Logo from "@assets/svg/cart.svg?react";
-import styles from "./styles.module.css";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "@store/hooks";
-import { getCartTotalQuantitySelector } from "@store/cart/CartSlice";
+import { getCartTotalQuantitySelector } from "@store/cart/selectors";
+import Logo from "@assets/svg/cart.svg?react";
 
-const { basketContainer, basketQuantity } = styles;
+import styles from "./styles.module.css";
+const { basketContainer, basketQuantity, pumpCartQuantity, basketCart } =
+  styles;
 
-const HeaderBaskect = () => {
+const HeaderBasket = () => {
+  const [isAnimate, setIsAnimate] = useState(false);
   const totalQuantity = useAppSelector(getCartTotalQuantitySelector);
+  const quantityStyle = `${basketQuantity} ${
+    isAnimate ? pumpCartQuantity : ""
+  }`;
 
-  // This is how I get the some of all value from an object ({'test': 5, 'test2': 11, ...})
-  // reduce() => Used in summition of many values from an array (takes 0 as an initial value)
+  useEffect(() => {
+    if (!totalQuantity) {
+      return;
+    }
+    setIsAnimate(true);
+
+    const debounce = setTimeout(() => {
+      setIsAnimate(false);
+    }, 300);
+
+    return () => clearTimeout(debounce);
+  }, [totalQuantity]);
 
   return (
     <div className={basketContainer}>
-      <Logo title="Basket icon" />
-      <div className={basketQuantity}>{totalQuantity}</div>
+      <div className={basketCart}>
+        <Logo title="basket icon" />
+        <div className={quantityStyle}>{totalQuantity}</div>
+      </div>
+      <h3>Cart</h3>
     </div>
   );
 };
 
-export default HeaderBaskect;
+export default HeaderBasket;

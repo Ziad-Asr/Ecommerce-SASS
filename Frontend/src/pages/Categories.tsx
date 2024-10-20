@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { GridList } from "@components/common";
+import { GridList, Heading } from "@components/common";
 import { Loading } from "@components/feedback";
 import { TCategory } from "@customTypes/category";
 import { actGetCategories } from "@store/Categories/CategoriesSlice";
@@ -23,6 +23,7 @@ const Categories = () => {
 
   return (
     <Loading loading={loading} error={error}>
+      <Heading>Categories</Heading>
       <GridList<TCategory>
         records={records}
         renderItem={(record) => <Category {...record} />}
