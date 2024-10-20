@@ -1,8 +1,9 @@
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 
 type GridListProps<T> = {
   records: T[];
-  renderItem: (record: T) => JSX.Element;
+  renderItem: (record: T) => React.ReactNode;
 };
 
 const GridList = <T extends { id?: number }>({

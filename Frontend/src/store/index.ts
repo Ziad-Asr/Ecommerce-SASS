@@ -1,12 +1,46 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import categories from "./Categories/CategoriesSlice";
 import products from "./Products/ProductsSlice";
+import cart from "./cart/CartSlice";
 
-export const store = configureStore({
-  reducer: { categories, products },
+const cartPersistConfig = {
+  key: "cart",
+  storage,
+  whitelist: ["items"], // only store (items) from this state (not productFullInfo)
+};
+
+const rootReducer = combineReducers({
+  categories,
+  products,
+  cart: persistReducer(cartPersistConfig, cart),
 });
 
-export type RootState = ReturnType<typeof store.getState>; // In components, when I type (state.) it gives me a list of available reducers
-export type AppDispatch = typeof store.dispatch; // In components, this make sure that action (like actGetCategories) is exist when I am (dispatcing) it
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
 
-export default store;
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch;
+
+const persistor = persistStore(store);
+
+export { store, persistor };
