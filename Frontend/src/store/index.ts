@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage";
 import categories from "./Categories/CategoriesSlice";
 import products from "./Products/ProductsSlice";
 import cart from "./cart/CartSlice";
+import wishlist from "./wishlist/wishlistSlice";
 
 const cartPersistConfig = {
   key: "cart",
@@ -20,10 +21,17 @@ const cartPersistConfig = {
   whitelist: ["items"], // only store (items) from this state (not productFullInfo)
 };
 
+const wishlistPersistConfig = {
+  key: "wishlist",
+  storage,
+  whitelist: ["itemsId"],
+};
+
 const rootReducer = combineReducers({
   categories,
   products,
   cart: persistReducer(cartPersistConfig, cart),
+  wishlist: persistReducer(wishlistPersistConfig, wishlist),
 });
 
 const store = configureStore({

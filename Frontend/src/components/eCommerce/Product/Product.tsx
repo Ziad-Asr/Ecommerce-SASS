@@ -4,14 +4,24 @@ import { addToCart } from "@store/cart/CartSlice";
 import { Button, Spinner } from "react-bootstrap";
 import { TProduct } from "@customTypes/products";
 import Like from "@assets/svg/like.svg?react";
-// import LikeFill from "@assets/svg/like-fill.svg?react";
+import LikeFill from "@assets/svg/like-fill.svg?react";
 
 import styles from "./styles.module.css";
+import { actLikeToggle } from "@store/wishlist/wishlistSlice";
 const { product, productImg, maximumNotice, wishlistBtn } = styles;
 
-const Product = ({ id, title, price, img, max, quantity }: TProduct) => {
+const Product = ({
+  id,
+  title,
+  price,
+  img,
+  max,
+  quantity,
+  isLiked,
+}: TProduct) => {
   const dispatch = useAppDispatch();
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const currentRemainingQuantity = max - (quantity ?? 0);
   // Nullish coalescing
@@ -36,10 +46,26 @@ const Product = ({ id, title, price, img, max, quantity }: TProduct) => {
     setIsBtnDisabled(true);
   };
 
+  const likeToggleHandler = () => {
+    if (!isLoading) {
+      setIsLoading(true);
+      dispatch(actLikeToggle(id))
+        .unwrap()
+        .then(() => setIsLoading(false)) // for success response
+        .catch(() => setIsLoading(false)); // for network errors
+    }
+  };
+
   return (
     <div className={product}>
-      <div className={wishlistBtn}>
-        <Like />
+      <div className={wishlistBtn} onClick={likeToggleHandler}>
+        {isLoading ? (
+          <Spinner animation="border" size="sm" variant="primary" />
+        ) : isLiked ? (
+          <LikeFill />
+        ) : (
+          <Like />
+        )}
       </div>
       <div className={productImg}>
         <img src={img} alt={title} />

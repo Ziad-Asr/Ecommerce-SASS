@@ -16,10 +16,12 @@ const Products = () => {
 
   const { loading, error, records } = useAppSelector((state) => state.products);
   const cartItems = useAppSelector((state) => state.cart.items);
+  const wishlistItemsId = useAppSelector((state) => state.wishlist.itemsId);
 
   const productsFullInfo = records.map((el) => ({
     ...el,
     quantity: cartItems[el.id] || 0, // Because (cartItems) here holds [{productID: productQuantity}, ....]
+    isLiked: wishlistItemsId.includes(el.id),
   }));
   // Here I made the same array of products + (quantity) key
   // This helps me in (Fair Distribution Policy)

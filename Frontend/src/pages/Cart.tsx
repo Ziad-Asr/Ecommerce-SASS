@@ -5,6 +5,7 @@ import {
   actGetProductsByItems,
   cartItemChangeQuantity,
   cartItemRemove,
+  productsCartFullInfoCleanUp,
 } from "@store/cart/CartSlice";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useCallback, useEffect } from "react";
@@ -17,6 +18,9 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(actGetProductsByItems()); // This returns only fullInfo of items in the cart
+    return () => {
+      dispatch(productsCartFullInfoCleanUp());
+    };
   }, [dispatch]);
 
   // Add (quantity) to (productsFullInfo) of each item
