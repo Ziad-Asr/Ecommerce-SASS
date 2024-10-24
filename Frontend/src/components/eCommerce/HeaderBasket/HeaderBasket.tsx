@@ -1,21 +1,18 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@store/hooks";
 import { getCartTotalQuantitySelector } from "@store/cart/selectors";
+import { useNavigate } from "react-router-dom";
 import Logo from "@assets/svg/cart.svg?react";
 
 import styles from "./styles.module.css";
-import { useNavigate } from "react-router-dom";
-const { basketContainer, basketQuantity, pumpCartQuantity, basketCart } =
-  styles;
+const { container, totalNum, pumpAnimate, iconWrapper } = styles;
 
 const HeaderBasket = () => {
   const navigate = useNavigate();
 
   const [isAnimate, setIsAnimate] = useState(false);
   const totalQuantity = useAppSelector(getCartTotalQuantitySelector);
-  const quantityStyle = `${basketQuantity} ${
-    isAnimate ? pumpCartQuantity : ""
-  }`;
+  const quantityStyle = `${totalNum} ${isAnimate ? pumpAnimate : ""}`;
 
   useEffect(() => {
     if (!totalQuantity) {
@@ -31,10 +28,12 @@ const HeaderBasket = () => {
   }, [totalQuantity]);
 
   return (
-    <div className={basketContainer} onClick={() => navigate("/cart")}>
-      <div className={basketCart}>
+    <div className={container} onClick={() => navigate("/cart")}>
+      <div className={iconWrapper}>
         <Logo title="basket icon" />
-        <div className={quantityStyle}>{totalQuantity}</div>
+        {totalQuantity > 0 && (
+          <div className={quantityStyle}>{totalQuantity}</div>
+        )}
       </div>
       <h3>Cart</h3>
     </div>

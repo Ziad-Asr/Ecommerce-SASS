@@ -1,4 +1,5 @@
-import HeaderBaskect from "./HeaderBaskect/HeaderBaskect";
+import HeaderBasket from "./HeaderBasket/HeaderBasket";
+import HeaderWishlist from "./HeaderWishlist/HeaderWishlist";
 import Product from "./Product/Product";
 import Category from "./Category/Category";
 import CartItem from "./CartItem/CartItem";
@@ -6,7 +7,8 @@ import CartSubtotalPrice from "./CartSubtotalPriceProps/CartSubtotalPriceProps";
 import CartItemList from "./CartItemList/CartItemList";
 
 export {
-  HeaderBaskect,
+  HeaderBasket,
+  HeaderWishlist,
   Product,
   Category,
   CartItem,
