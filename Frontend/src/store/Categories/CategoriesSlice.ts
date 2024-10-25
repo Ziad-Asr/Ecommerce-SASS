@@ -18,7 +18,11 @@ const initialState: ICategoriesState = {
 const categoriesSlice = createSlice({
   name: "categories",
   initialState,
-  reducers: {},
+  reducers: {
+    categoriesRecordsCleanUp: (state) => {
+      state.records = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(actGetCategories.pending, (state) => {
       state.loading = "pending";
@@ -40,4 +44,5 @@ const categoriesSlice = createSlice({
 });
 
 export { actGetCategories }; // I exported it from here, To import the slice and extract all data from it one time
+export const { categoriesRecordsCleanUp } = categoriesSlice.actions;
 export default categoriesSlice.reducer;

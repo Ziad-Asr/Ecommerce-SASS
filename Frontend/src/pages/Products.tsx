@@ -5,7 +5,7 @@ import { GridList, Heading } from "@components/common";
 import { Loading } from "@components/feedback";
 import {
   actGetProductsByCatPrefix,
-  productsCleanUp,
+  cleanUpProductsRecords,
 } from "@store/Products/ProductsSlice";
 import { TProduct } from "@customTypes/products";
 import { Product } from "@components/eCommerce";
@@ -31,15 +31,13 @@ const Products = () => {
     // I used (casting) here I will not reach this state exept I make sure that the whole url is string in routes
 
     return () => {
-      dispatch(productsCleanUp());
+      dispatch(cleanUpProductsRecords());
     }; // remove products from global state on leaving products page
   }, [dispatch, params]);
 
   return (
     <>
-      <Heading>
-        <span className="text-capitalize">{params.prefix}</span> Products
-      </Heading>
+      <Heading title={`${params.prefix?.toUpperCase()} Products`} />
       <Loading loading={loading} error={error}>
         <GridList<TProduct>
           records={productsFullInfo}

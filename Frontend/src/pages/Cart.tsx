@@ -5,7 +5,7 @@ import {
   actGetProductsByItems,
   cartItemChangeQuantity,
   cartItemRemove,
-  productsCartFullInfoCleanUp,
+  cleanCartProductsFullInfoCleanUp,
 } from "@store/cart/CartSlice";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useCallback, useEffect } from "react";
@@ -19,7 +19,7 @@ const Cart = () => {
   useEffect(() => {
     dispatch(actGetProductsByItems()); // This returns only fullInfo of items in the cart
     return () => {
-      dispatch(productsCartFullInfoCleanUp());
+      dispatch(cleanCartProductsFullInfoCleanUp());
     };
   }, [dispatch]);
 
@@ -47,7 +47,7 @@ const Cart = () => {
 
   return (
     <>
-      <Heading>Your Cart</Heading>
+      <Heading title="Your Cart" />
       <Loading loading={loading} error={error}>
         {products.length ? (
           <>

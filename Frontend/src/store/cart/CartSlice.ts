@@ -46,7 +46,7 @@ const CartSlice = createSlice({
         (el) => el.id !== action.payload
       );
     },
-    productsCartFullInfoCleanUp: (state) => {
+    cleanCartProductsFullInfoCleanUp: (state) => {
       state.productsFullInfo = [];
     },
   },
@@ -73,6 +73,6 @@ export const {
   addToCart,
   cartItemChangeQuantity,
   cartItemRemove,
-  productsCartFullInfoCleanUp,
+  cleanCartProductsFullInfoCleanUp,
 } = CartSlice.actions;
 export default CartSlice.reducer;

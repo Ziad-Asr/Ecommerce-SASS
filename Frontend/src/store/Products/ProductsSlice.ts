@@ -21,7 +21,7 @@ const ProductsSlice = createSlice({
   initialState,
   reducers: {
     // A fuction to clear data on leaving products page
-    productsCleanUp: (state) => {
+    cleanUpProductsRecords: (state) => {
       state.records = [];
     },
   },
@@ -45,6 +45,6 @@ const ProductsSlice = createSlice({
   },
 });
 
-export const { productsCleanUp } = ProductsSlice.actions;
+export const { cleanUpProductsRecords } = ProductsSlice.actions;
 export { actGetProductsByCatPrefix }; // I exported it from here, To import the slice and extract all data from it one time
 export default ProductsSlice.reducer;

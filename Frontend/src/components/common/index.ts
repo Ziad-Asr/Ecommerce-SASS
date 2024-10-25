@@ -1,7 +1,8 @@
 import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
+import HeaderCounter from "./Header/HeaderCounter/HeaderCounter";
 import AuthHeader from "./AuthHeader/AuthHeader";
-import GridList from "./GridList/GridList";
 import Heading from "./Heading/Heading";
+import GridList from "./GridList/GridList";
+import Footer from "./Footer/Footer";
 
-export { Header, Footer, AuthHeader, GridList, Heading };
+export { Header, HeaderCounter, AuthHeader, Heading, GridList, Footer };
