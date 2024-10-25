@@ -5,12 +5,7 @@ import {
   cleanWishlistProductsFullInfo,
 } from "@store/wishlist/wishlistSlice";
 
-import { GridList, Heading } from "@components/common";
-import { Product } from "@components/eCommerce";
-import { Loading } from "@components/feedback";
-import { TProduct } from "@customTypes/products";
-
-const Wishlist = () => {
+const useWishlist = () => {
   const dispatch = useAppDispatch();
   const { loading, error, productsFullInfo } = useAppSelector(
     (state) => state.wishlist
@@ -30,17 +25,7 @@ const Wishlist = () => {
     isLiked: true,
   }));
 
-  return (
-    <>
-      <Heading title="Your Wishlist" />
-      <Loading loading={loading} error={error}>
-        <GridList<TProduct>
-          records={records}
-          renderItem={(record) => <Product {...record} />}
-        />
-      </Loading>
-    </>
-  );
+  return { records, loading, error };
 };
 
-export default Wishlist;
+export default useWishlist;

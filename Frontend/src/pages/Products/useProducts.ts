@@ -1,17 +1,14 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { GridList, Heading } from "@components/common";
-import { Loading } from "@components/feedback";
 import {
   actGetProductsByCatPrefix,
   cleanUpProductsRecords,
 } from "@store/Products/ProductsSlice";
-import { TProduct } from "@customTypes/products";
-import { Product } from "@components/eCommerce";
 
-const Products = () => {
+const useProducts = () => {
   const params = useParams();
+  const productPrefix = params.prefix;
   const dispatch = useAppDispatch();
 
   const { loading, error, records } = useAppSelector((state) => state.products);
@@ -35,17 +32,7 @@ const Products = () => {
     }; // remove products from global state on leaving products page
   }, [dispatch, params]);
 
-  return (
-    <>
-      <Heading title={`${params.prefix?.toUpperCase()} Products`} />
-      <Loading loading={loading} error={error}>
-        <GridList<TProduct>
-          records={productsFullInfo}
-          renderItem={(record) => <Product {...record} />}
-        />
-      </Loading>
-    </>
-  );
+  return { loading, error, productsFullInfo, productPrefix };
 };
 
-export default Products;
+export default useProducts;

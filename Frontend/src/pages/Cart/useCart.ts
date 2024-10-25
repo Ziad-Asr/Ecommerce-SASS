@@ -1,6 +1,3 @@
-import { Heading } from "@components/common";
-import { CartItemList, CartSubtotalPrice } from "@components/eCommerce";
-import { Loading } from "@components/feedback";
 import {
   actGetProductsByItems,
   cartItemChangeQuantity,
@@ -10,8 +7,9 @@ import {
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useCallback, useEffect } from "react";
 
-const Cart = () => {
+const useCart = () => {
   const dispatch = useAppDispatch();
+
   const { items, productsFullInfo, loading, error } = useAppSelector(
     (state) => state.cart
   );
@@ -45,25 +43,7 @@ const Cart = () => {
     [dispatch]
   );
 
-  return (
-    <>
-      <Heading title="Your Cart" />
-      <Loading loading={loading} error={error}>
-        {products.length ? (
-          <>
-            <CartItemList
-              products={products}
-              changeQuantityHandler={changeQuantityHandler}
-              removeItemHandler={removeItemHandler}
-            />
-            <CartSubtotalPrice products={products} />
-          </>
-        ) : (
-          "Your Cart is empty"
-        )}
-      </Loading>
-    </>
-  );
+  return { loading, error, products, changeQuantityHandler, removeItemHandler };
 };
 
-export default Cart;
+export default useCart;

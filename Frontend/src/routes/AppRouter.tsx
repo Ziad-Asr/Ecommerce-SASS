@@ -5,14 +5,14 @@ import { AuthLayout, MainLayout } from "@layouts/index";
 
 // Pages
 import Home from "@pages/Home";
-import Products from "@pages/Products";
-import Categories from "@pages/Categories";
+import Products from "@pages/Products/Products";
+import Categories from "@pages/Categories/Categories";
 import AboutUs from "@pages/AboutUs";
 import Login from "@pages/Login";
 import Register from "@pages/Register";
 import Error from "@pages/Error/Error";
-import Cart from "@pages/Cart";
-import Wishlist from "@pages/Wishlist";
+import Cart from "@pages/Cart/Cart";
+import Wishlist from "@pages/Wishlist/Wishlist";
 
 const AppRouter = () => {
   const router = createBrowserRouter([
