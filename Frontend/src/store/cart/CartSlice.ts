@@ -1,8 +1,7 @@
-import { TProduct } from "@customTypes/products";
 import { createSlice } from "@reduxjs/toolkit";
 import { getCartTotalQuantitySelector } from "./selectors/index";
 import actGetProductsByItems from "./act/actGetProductsByItems";
-import { TLoading } from "@customTypes/shared";
+import { TLoading, TProduct, isString } from "@types";
 
 interface ICartState {
   items: { [key: string]: number }; // id: quantity (key in object => Js always transform it to a (string))
@@ -61,7 +60,7 @@ const CartSlice = createSlice({
     });
     builder.addCase(actGetProductsByItems.rejected, (state, action) => {
       state.loading = "failed";
-      if (action.payload && typeof action.payload === "string") {
+      if (isString(action.payload)) {
         state.error = action.payload;
       }
     });

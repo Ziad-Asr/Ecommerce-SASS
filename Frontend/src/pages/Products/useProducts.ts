@@ -24,11 +24,14 @@ const useProducts = () => {
   // This helps me in (Fair Distribution Policy)
 
   useEffect(() => {
-    dispatch(actGetProductsByCatPrefix(params.prefix as string));
+    const promise = dispatch(
+      actGetProductsByCatPrefix(params.prefix as string)
+    );
     // I used (casting) here I will not reach this state exept I make sure that the whole url is string in routes
 
     return () => {
       dispatch(cleanUpProductsRecords());
+      promise.abort();
     }; // remove products from global state on leaving products page
   }, [dispatch, params]);
 

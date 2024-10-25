@@ -1,7 +1,8 @@
-import { TProduct } from "@customTypes/products";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "@store/index";
 import axios from "axios";
+import { axiosErrorHandler } from "@utils";
+import { TProduct } from "@types";
 
 type TResponse = TProduct[];
 
@@ -11,7 +12,7 @@ type TResponse = TProduct[];
 const actGetProductsByItems = createAsyncThunk(
   "cart/actGetProductsByItems",
   async (_, thunkAPI) => {
-    const { rejectWithValue, fulfillWithValue, getState } = thunkAPI;
+    const { rejectWithValue, fulfillWithValue, getState, signal } = thunkAPI;
     const { cart } = getState() as RootState;
     const itemsId = Object.keys(cart.items);
 
@@ -24,17 +25,14 @@ const actGetProductsByItems = createAsyncThunk(
     try {
       const concatenatedItemsId = itemsId.map((el) => `id=${el}`).join("&");
       const response = await axios.get<TResponse>(
-        `/products?${concatenatedItemsId}`
+        `/products?${concatenatedItemsId}`,
+        { signal }
       ); // localhost:5000://products?id=1&id=2&id=3&... => return all items in the cart
       // Do not return all items info, only return info of cart items (items of these ids)
 
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(error.response?.data.message || error.message);
-      } else {
-        return rejectWithValue("An unexpected error");
-      }
+      return rejectWithValue(axiosErrorHandler(error));
     }
   }
 );

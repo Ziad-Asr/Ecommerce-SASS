@@ -15,8 +15,9 @@ const useCart = () => {
   );
 
   useEffect(() => {
-    dispatch(actGetProductsByItems()); // This returns only fullInfo of items in the cart
+    const promise = dispatch(actGetProductsByItems()); // This returns only fullInfo of items in the cart
     return () => {
+      promise.abort();
       dispatch(cleanCartProductsFullInfoCleanUp());
     };
   }, [dispatch]);

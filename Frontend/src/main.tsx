@@ -3,7 +3,7 @@ import AppRouter from "./routes/AppRouter";
 // Redux
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./store/index";
+import { store, persistor } from "./store";
 // Axios config
 import "./services/axios-global.js";
 // Styles

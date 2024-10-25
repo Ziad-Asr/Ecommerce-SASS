@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import actGetProductsByCatPrefix from "./act/actGetProductsByCatPrefix";
-
-import { TLoading } from "@customTypes/shared";
-import { TProduct } from "@customTypes/products";
+import { isString, TLoading, TProduct } from "@types";
 
 interface ICategoriesState {
   records: TProduct[];
@@ -36,7 +34,7 @@ const ProductsSlice = createSlice({
     });
     builder.addCase(actGetProductsByCatPrefix.rejected, (state, action) => {
       state.loading = "failed";
-      if (action.payload && typeof action.payload === "string") {
+      if (isString(action.payload)) {
         state.error = action.payload;
       }
       // Important note: Any time you see a error in typescript about variable type => {{{ Put a guard }}}(if statement)

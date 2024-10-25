@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import { useAppDispatch } from "@store/hooks";
 import { addToCart } from "@store/cart/CartSlice";
 import { Button, Spinner } from "react-bootstrap";
-import { TProduct } from "@customTypes/products";
+import { TProduct } from "@types";
 import Like from "@assets/svg/like.svg?react";
 import LikeFill from "@assets/svg/like-fill.svg?react";
 

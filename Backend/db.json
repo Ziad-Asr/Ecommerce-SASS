@@ -112,6 +112,11 @@
       "userId": 1,
       "productId": 17,
       "id": 4
+    },
+    {
+      "userId": 1,
+      "productId": 2,
+      "id": 5
     }
   ]
 }
