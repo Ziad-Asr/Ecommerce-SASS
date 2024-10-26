@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-
 import { Container } from "react-bootstrap";
 import { AuthHeader } from "@components/common";
 
