@@ -1,6 +1,6 @@
 import useCart from "./useCart";
 import { Heading } from "@components/common";
-import { Loading } from "@components/feedback";
+import { Loading, LottieHandler } from "@components/feedback";
 import { CartItemList, CartSubtotalPrice } from "@components/eCommerce";
 
 const Cart = () => {
@@ -9,7 +9,7 @@ const Cart = () => {
   return (
     <>
       <Heading title="Your Cart" />
-      <Loading loading={loading} error={error}>
+      <Loading loading={loading} error={error} type="cart">
         {products.length ? (
           <>
             <CartItemList
@@ -20,7 +20,7 @@ const Cart = () => {
             <CartSubtotalPrice products={products} />
           </>
         ) : (
-          "Your Cart is empty"
+          <LottieHandler message="Your cart is empty" type="empty" />
         )}
       </Loading>
     </>

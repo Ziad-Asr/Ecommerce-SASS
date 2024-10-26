@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // layouts
 const MainLayout = lazy(() => import("@layouts/MainLayout/MainLayout"));
 const AuthLayout = lazy(() => import("@layouts/AuthLayout/AuthLayout"));
+// components
+import { LottieHandler, PageSuspenseFallback } from "@components/feedback";
 // pages
 const Home = lazy(() => import("@pages/Home"));
 const Wishlist = lazy(() => import("@pages/Wishlist/Wishlist"));
@@ -19,7 +21,13 @@ const AppRouter = () => {
     {
       path: "/",
       element: (
-        <Suspense fallback="loading please wait..">
+        <Suspense
+          fallback={
+            <div style={{ marginTop: "10%" }}>
+              <LottieHandler type="loading" message="Loading please wait..." />
+            </div>
+          }
+        >
           <MainLayout />
         </Suspense>
       ),
@@ -28,25 +36,25 @@ const AppRouter = () => {
         {
           index: true,
           element: (
-            <Suspense fallback="loading please wait..">
+            <PageSuspenseFallback>
               <Home />
-            </Suspense>
+            </PageSuspenseFallback>
           ),
         },
         {
           path: "categories",
           element: (
-            <Suspense fallback="loading please wait..">
+            <PageSuspenseFallback>
               <Categories />
-            </Suspense>
+            </PageSuspenseFallback>
           ),
         },
         {
           path: "categories/products/:prefix",
           element: (
-            <Suspense fallback="loading please wait..">
+            <PageSuspenseFallback>
               <Products />
-            </Suspense>
+            </PageSuspenseFallback>
           ),
           loader: ({ params }) => {
             if (
@@ -67,25 +75,25 @@ const AppRouter = () => {
         {
           path: "about-us",
           element: (
-            <Suspense fallback="loading please wait..">
+            <PageSuspenseFallback>
               <AboutUs />
-            </Suspense>
+            </PageSuspenseFallback>
           ),
         },
         {
           path: "cart",
           element: (
-            <Suspense fallback="loading please wait..">
+            <PageSuspenseFallback>
               <Cart />
-            </Suspense>
+            </PageSuspenseFallback>
           ),
         },
         {
           path: "wishlist",
           element: (
-            <Suspense fallback="loading please wait..">
+            <PageSuspenseFallback>
               <Wishlist />
-            </Suspense>
+            </PageSuspenseFallback>
           ),
         },
       ],
@@ -93,7 +101,13 @@ const AppRouter = () => {
     {
       path: "auth",
       element: (
-        <Suspense fallback="loading please wait..">
+        <Suspense
+          fallback={
+            <div style={{ marginTop: "10%" }}>
+              <LottieHandler type="loading" message="Loading please wait..." />
+            </div>
+          }
+        >
           <AuthLayout />
         </Suspense>
       ),
@@ -102,17 +116,17 @@ const AppRouter = () => {
         {
           path: "login",
           element: (
-            <Suspense fallback="loading please wait..">
+            <PageSuspenseFallback>
               <Login />
-            </Suspense>
+            </PageSuspenseFallback>
           ),
         },
         {
           path: "register",
           element: (
-            <Suspense fallback="loading please wait..">
+            <PageSuspenseFallback>
               <Register />
-            </Suspense>
+            </PageSuspenseFallback>
           ),
         },
       ],
