@@ -100,45 +100,39 @@
   "wishList": [
     {
       "userId": 1,
+      "productId": 3,
+      "id": 2
+    },
+    {
+      "userId": 2,
       "productId": 6,
-      "id": 1
+      "id": 4
+    },
+    {
+      "userId": 2,
+      "productId": 9,
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "productId": 1,
+      "id": 6
     }
   ],
   "users": [
     {
-      "email": "ZiadElsayedAsr@gmail.com",
-      "password": "$2a$10$7j8GPi3MxKKr5Lw2LTrUuenGL6dlatUinRM9LeZT3BGt7Fhis/Dx6",
+      "email": "ziad@gmail.com",
+      "password": "$2a$10$R/5ERrKcIwbiv3f7kn9BP.5tBMPhY3IOV0L2tdbxCDl/.3xSjXhvC",
       "firstName": "ziad",
       "lastName": "mohamed",
       "id": 1
     },
     {
-      "email": "test@gmail.com",
-      "password": "$2a$10$h8Sb3TBZVqG2KFeF7G8WVel6MJFja/7hy9SQQczmyeMm9.VLmMr5S",
-      "firstName": "test",
-      "lastName": "test",
+      "email": "mohamed@gmail.com",
+      "password": "$2a$10$YsoF/4NS6kJi4hURhxDq/uPKm1NePG7s.q/iySzXUzGOyKWcRSgI.",
+      "firstName": "Mohamed",
+      "lastName": "Elsayed",
       "id": 2
-    },
-    {
-      "email": "Mohanad@gmail.com",
-      "password": "$2a$10$R12yV3S7F5nLkkQDl0HpZ.nv0Z8SJj8eYtH5LCj9fF/fOWRVojDkC",
-      "firstName": "Mohanad",
-      "lastName": "Asr",
-      "id": 3
-    },
-    {
-      "email": "Moaz@gmail.com",
-      "password": "$2a$10$.S7EVGvwgfjALEBxM9U36e9pED8qYeNbqncIfGgxsx8Q0vqnB/wTq",
-      "firstName": "Moaz",
-      "lastName": "Nasr",
-      "id": 4
-    },
-    {
-      "email": "testUser@gmail.com",
-      "password": "$2a$10$LlWNluq5thPgZoQFe0hKNOWzK7JTHgC39Z64jaCZJVvyygIhPpXkm",
-      "firstName": "testUser",
-      "lastName": "testUser",
-      "id": 5
     }
   ]
 }
