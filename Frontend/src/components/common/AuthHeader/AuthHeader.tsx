@@ -5,9 +5,12 @@ const { headerContainer, headerLogo } = styles;
 
 const AuthHeader = () => {
   const urlSlices = window.location.href.split("/");
-  const authType = urlSlices[urlSlices.length - 1].replace(/^\w/, (c) =>
-    c.toUpperCase()
-  );
+  const authType = urlSlices[urlSlices.length - 1].split("?");
+  const type = authType.includes("login")
+    ? "Login"
+    : urlSlices.includes("register")
+    ? "Register"
+    : "";
 
   return (
     <header>
@@ -16,7 +19,7 @@ const AuthHeader = () => {
           <span>Our</span> <Badge bg="info">Ecom</Badge>
         </h1>
 
-        <h2>{authType}</h2>
+        <h2>{type}</h2>
       </div>
     </header>
   );

@@ -12,8 +12,8 @@ const Categories = lazy(() => import("@pages/Categories/Categories"));
 const Cart = lazy(() => import("@pages/Cart/Cart"));
 const Products = lazy(() => import("@pages/Products/Products"));
 const AboutUs = lazy(() => import("@pages/AboutUs"));
-const Login = lazy(() => import("@pages/Login"));
-const Register = lazy(() => import("@pages/Register"));
+const Login = lazy(() => import("@pages/Login/Login"));
+const Register = lazy(() => import("@pages/Register/Register"));
 import Error from "@pages/Error/Error";
 
 const AppRouter = () => {
