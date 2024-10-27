@@ -32,7 +32,6 @@ const Input = <TFieldValue extends FieldValues>({
       register(name).onBlur(e);
     }
   };
-
   return (
     <Form.Group className="mb-3">
       <Form.Label>{label}</Form.Label>

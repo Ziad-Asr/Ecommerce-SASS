@@ -97,5 +97,13 @@
       "max": 2
     }
   ],
-  "wishList": []
+  "wishList": [],
+  "users": [
+    {
+      "firstName": "Ziad",
+      "lastName": "Elsayed",
+      "email": "ziad@gmail.com",
+      "password": "ziad123"
+    }
+  ]
 }
