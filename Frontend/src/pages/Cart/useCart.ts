@@ -14,6 +14,8 @@ const useCart = () => {
     (state) => state.cart
   );
 
+  const userAccessToken = useAppSelector((state) => state.auth.accessToken);
+
   useEffect(() => {
     const promise = dispatch(actGetProductsByItems()); // This returns only fullInfo of items in the cart
     return () => {
@@ -44,7 +46,14 @@ const useCart = () => {
     [dispatch]
   );
 
-  return { loading, error, products, changeQuantityHandler, removeItemHandler };
+  return {
+    loading,
+    error,
+    products,
+    userAccessToken,
+    changeQuantityHandler,
+    removeItemHandler,
+  };
 };
 
 export default useCart;

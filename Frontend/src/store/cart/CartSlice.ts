@@ -46,6 +46,7 @@ const CartSlice = createSlice({
       );
     },
     cleanCartProductsFullInfoCleanUp: (state) => {
+      state.items = {};
       state.productsFullInfo = [];
     },
   },
