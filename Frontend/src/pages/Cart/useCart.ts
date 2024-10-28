@@ -6,6 +6,7 @@ import {
 } from "@store/cart/CartSlice";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useCallback, useEffect } from "react";
+import { resetOrderStatus } from "@store/orders/ordersSlice";
 
 const useCart = () => {
   const dispatch = useAppDispatch();
@@ -16,21 +17,7 @@ const useCart = () => {
 
   const userAccessToken = useAppSelector((state) => state.auth.accessToken);
 
-  useEffect(() => {
-    const promise = dispatch(actGetProductsByItems()); // This returns only fullInfo of items in the cart
-    return () => {
-      promise.abort();
-      dispatch(cleanCartProductsFullInfoCleanUp());
-    };
-  }, [dispatch]);
-
-  // Add (quantity) to (productsFullInfo) of each item
-  const products = productsFullInfo.map((el) => {
-    return {
-      ...el,
-      quantity: items[el.id],
-    };
-  });
+  const placeOrderStatus = useAppSelector((state) => state.orders.loading);
 
   const changeQuantityHandler = useCallback(
     (id: number, quantity: number) => {
@@ -46,11 +33,28 @@ const useCart = () => {
     [dispatch]
   );
 
+  // Add (quantity) to (productsFullInfo) of each item
+  const products = productsFullInfo.map((el) => ({
+    ...el,
+    quantity: items[el.id],
+  }));
+
+  useEffect(() => {
+    const promise = dispatch(actGetProductsByItems()); // This returns only fullInfo of items in the cart
+
+    return () => {
+      promise.abort();
+      dispatch(cleanCartProductsFullInfoCleanUp());
+      dispatch(resetOrderStatus());
+    };
+  }, [dispatch]);
+
   return {
     loading,
     error,
     products,
     userAccessToken,
+    placeOrderStatus,
     changeQuantityHandler,
     removeItemHandler,
   };

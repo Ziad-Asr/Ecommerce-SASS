@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@store/hooks";
 import { actPlaceOrder } from "@store/orders/ordersSlice";
-import { cleanCartProductsFullInfoCleanUp } from "@store/cart/CartSlice";
+import { clearCartAfterPlaceOrder } from "@store/cart/CartSlice";
 import { useState } from "react";
 import { TProduct } from "@types";
 import { Button, Modal, Spinner } from "react-bootstrap";
@@ -41,7 +41,7 @@ const CartSubtotalPrice = ({
     dispatch(actPlaceOrder(subtotal))
       .unwrap()
       .then(() => {
-        dispatch(cleanCartProductsFullInfoCleanUp());
+        dispatch(clearCartAfterPlaceOrder());
         setShowModal(false);
       })
       .catch((error) => {
