@@ -19,6 +19,13 @@ const useOrders = () => {
     setSelectedProduct((prev) => [...prev, ...newItems]);
   };
 
+  // ################################################
+  // ### Manage all logic in the parent component ###
+  // ################################################
+  // Manage the logic of showing the Modal of order details in the parent component
+  // Manage the rendered list of order details in the parent
+  // Send all that as props to the child component (order details Modal)
+
   const closeModalHandler = () => {
     setShowModal(false);
     setSelectedProduct([]);
