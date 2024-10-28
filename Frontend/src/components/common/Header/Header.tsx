@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { authLogout } from "@store/auth/authslice";
 import { actGetWishlist } from "@store/wishlist/wishlistSlice";
 import { NavLink } from "react-router-dom";
 import { Badge, Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import HeaderLeftBar from "./HeaderLeftBar/HeaderLeftBar";
 import styles from "./styles.module.css";
-import { authLogout } from "@store/auth/authslice";
 
 const { headerContainer, headerLogo } = styles;
 
@@ -51,10 +51,10 @@ const Header = () => {
             <Nav>
               {!accessToken ? (
                 <>
-                  <Nav.Link as={NavLink} to="auth/login">
+                  <Nav.Link as={NavLink} to="login">
                     Login
                   </Nav.Link>
-                  <Nav.Link as={NavLink} to="auth/register">
+                  <Nav.Link as={NavLink} to="register">
                     Register
                   </Nav.Link>
                 </>
@@ -63,10 +63,12 @@ const Header = () => {
                   title={`Welcome: ${user?.firstName} ${user?.lastName}`}
                   id="basic-nav-dropdown"
                 >
-                  <NavDropdown.Item as={NavLink} to="profile">
+                  <NavDropdown.Item as={NavLink} to="profile" end>
                     Profile
                   </NavDropdown.Item>
-                  <NavDropdown.Item>Orders</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="profile/orders">
+                    Orders
+                  </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item
                     as={NavLink}

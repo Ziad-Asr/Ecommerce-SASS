@@ -2,8 +2,9 @@ import React from "react";
 import CategorySkeleton from "../skeletons/CategorySkeleton/CategorySkeleton";
 import ProductSkeleton from "../skeletons/ProductSkeleton/ProductSkeleton";
 import CartSkeleton from "../skeletons/CartSkeleton/CartSkeleton";
-import { TLoading } from "@types";
+import TableSkeleton from "../skeletons/TableSkeleton/TableSkeleton";
 import LottieHandler from "../LottieHandler/LottieHandler";
+import { TLoading } from "@types";
 
 // Dynamic component pattern
 // (choose rendered component based on dynamic key)
@@ -11,6 +12,7 @@ const skeletonsTypes = {
   category: CategorySkeleton,
   product: ProductSkeleton,
   cart: CartSkeleton,
+  table: TableSkeleton,
 }; // keys names = (type) values
 
 type LoadingProps = {

@@ -1,10 +1,16 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 // layouts
 const MainLayout = lazy(() => import("@layouts/MainLayout/MainLayout"));
 const AuthLayout = lazy(() => import("@layouts/AuthLayout/AuthLayout"));
+const ProfileLayout = lazy(
+  () => import("@layouts/ProfileLayout/ProfileLayout")
+); // Nested layout from (MainLayout)
+
 // components
 import { LottieHandler, PageSuspenseFallback } from "@components/feedback";
+
 // pages
 const Home = lazy(() => import("@pages/Home"));
 const Wishlist = lazy(() => import("@pages/Wishlist/Wishlist"));
@@ -14,8 +20,12 @@ const Products = lazy(() => import("@pages/Products/Products"));
 const AboutUs = lazy(() => import("@pages/AboutUs"));
 const Login = lazy(() => import("@pages/Login/Login"));
 const Register = lazy(() => import("@pages/Register/Register"));
-const Profile = lazy(() => import("@pages/Profile"));
+const Account = lazy(() => import("@pages/Account"));
+const Orders = lazy(() => import("@pages/Orders/Orders"));
+
+// Error Page
 import Error from "@pages/Error/Error";
+
 // Protect route
 import ProtectedRoute from "../components/Auth/ProtectedRoute";
 
@@ -106,10 +116,28 @@ const AppRouter = () => {
           element: (
             <ProtectedRoute>
               <PageSuspenseFallback>
-                <Profile />
+                <ProfileLayout />
               </PageSuspenseFallback>
             </ProtectedRoute>
           ),
+          children: [
+            {
+              index: true,
+              element: (
+                <PageSuspenseFallback>
+                  <Account />
+                </PageSuspenseFallback>
+              ),
+            },
+            {
+              path: "orders",
+              element: (
+                <PageSuspenseFallback>
+                  <Orders />
+                </PageSuspenseFallback>
+              ),
+            },
+          ],
         },
       ],
     },
