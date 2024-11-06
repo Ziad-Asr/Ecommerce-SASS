@@ -51,10 +51,10 @@ const Header = () => {
             <Nav>
               {!accessToken ? (
                 <>
-                  <Nav.Link as={NavLink} to="login">
+                  <Nav.Link as={NavLink} to="auth/login">
                     Login
                   </Nav.Link>
-                  <Nav.Link as={NavLink} to="register">
+                  <Nav.Link as={NavLink} to="auth/register">
                     Register
                   </Nav.Link>
                 </>
